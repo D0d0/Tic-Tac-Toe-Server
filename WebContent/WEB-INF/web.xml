@@ -128,6 +128,14 @@
     <servlet-name>UpdateArea</servlet-name>
     <url-pattern>/UpdateArea</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>GetArea</servlet-name>
+    <servlet-class>GetArea</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetArea</servlet-name>
+    <url-pattern>/GetArea</url-pattern>
+  </servlet-mapping>  
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>

@@ -14,16 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.simple.JSONObject;
 
 /**
- * Servlet implementation class GetOnlinePlayers
+ * Servlet implementation class GetArea
  */
-@WebServlet("/GetOnlinePlayers")
-public class GetOnlinePlayers extends HttpServlet {
+@WebServlet("/GetArea")
+public class GetArea extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetOnlinePlayers() {
+	public GetArea() {
 		super();
 	}
 
@@ -51,22 +51,14 @@ public class GetOnlinePlayers extends HttpServlet {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:" + pathGame);
 			stmt = c.createStatement();
-			String sql = "SELECT ONLINE, IS_ACTIVE, MOVE, RANK FROM GAME WHERE ID="
+			String sql = "SELECT AREA FROM GAME WHERE ID="
 					+ request.getParameter("id");
 			rs = stmt.executeQuery(sql);
 			if (!rs.next()) {
 				resp.put("result", new Boolean(false));
 			} else {
 				resp.put("result", new Boolean(true));
-				resp.put("online", rs.getInt("ONLINE"));
-				resp.put("is_active", rs.getInt("IS_ACTIVE"));
-				if (rs.getInt("IS_ACTIVE") == 2) {
-					resp.put("move", rs.getInt("MOVE"));
-					resp.put("rank", rs.getInt("RANK"));
-					sql = "UPDATE GAME SET RANK = RANK + 1 WHERE ID="
-							+ request.getParameter("id");
-					stmt.executeUpdate(sql);
-				}
+				resp.put("area", rs.getString("area"));
 			}
 		} catch (Exception e) {
 			resp.put("result", new Boolean(false));
