@@ -48,7 +48,7 @@ public class DumpDB extends HttpServlet {
 				rs = stmt.executeQuery(sql);
 				response.getWriter().write("<table>");
 				response.getWriter()
-						.write("<tr><td>ID</td><td>ONLINE</td><td>MAX</td><td>SIZE</td><td>ACTIVE</td><td>HOST</td><td>AREA</td><td>NAME</td><td>MOVE</td><td>RANK</td></tr>");
+						.write("<tr><td>ID</td><td>ONLINE</td><td>MAX</td><td>SIZE</td><td>ACTIVE</td><td>HOST</td><td>AREA</td><td>NAME</td><td>MOVE</td><td>RANK</td><td>ROWS</td><td>WINNER</td></tr>");
 				while (rs.next()) {
 					response.getWriter().write("<tr>");
 					response.getWriter().write("<td>");
@@ -67,11 +67,14 @@ public class DumpDB extends HttpServlet {
 					response.getWriter().write(rs.getString("AREA"));
 					response.getWriter().write("</td><td>");
 					response.getWriter().write(rs.getString("NAME"));
-					response.getWriter().write("</td>");
 					response.getWriter().write("</td><td>");
 					response.getWriter().write(rs.getString("MOVE"));
 					response.getWriter().write("</td><td>");
 					response.getWriter().write(rs.getString("RANK"));
+					response.getWriter().write("</td><td>");
+					response.getWriter().write(rs.getString("ROW_FOR_WIN"));
+					response.getWriter().write("</td><td>");
+					response.getWriter().write(rs.getString("WINNER"));
 					response.getWriter().write("</td>");
 					response.getWriter().write("</tr>");
 				}

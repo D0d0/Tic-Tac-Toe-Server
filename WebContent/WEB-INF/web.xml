@@ -135,7 +135,15 @@
   <servlet-mapping>
     <servlet-name>GetArea</servlet-name>
     <url-pattern>/GetArea</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>SetWinner</servlet-name>
+    <servlet-class>SetWinner</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetWinner</servlet-name>
+    <url-pattern>/SetWinner</url-pattern>
+  </servlet-mapping>
   <welcome-file-list>
     <welcome-file>Index</welcome-file>
   </welcome-file-list>

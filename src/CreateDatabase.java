@@ -55,7 +55,9 @@ public class CreateDatabase extends HttpServlet {
 					+ " AREA           TEXT                    NOT NULL, "
 					+ " IS_ACTIVE      INTEGER     			   NOT NULL, "
 					+ " RANK		   INTEGER				   NOT NULL,"
-					+ " MOVE		   INTEGER				   NOT NULL)";
+					+ " MOVE		   INTEGER				   NOT NULL,"
+					+ " ROW_FOR_WIN	   INTEGER				   NOT NULL,"
+					+ " WINNER		   INTEGER				   NOT NULL)";
 			stmt.executeUpdate(sql);
 			c = DriverManager.getConnection("jdbc:sqlite:" + pathPlayers);
 			stmt = c.createStatement();

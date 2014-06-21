@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -11,29 +10,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 /**
- * Servlet implementation class GetArea
+ * Servlet implementation class SetWinner
  */
-@WebServlet("/GetArea")
-public class GetArea extends HttpServlet {
+@WebServlet("/SetWinner")
+public class SetWinner extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public GetArea() {
+	public SetWinner() {
 		super();
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
 	}
 
 	/**
@@ -44,25 +32,17 @@ public class GetArea extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		Connection c = null;
 		Statement stmt = null;
-		ResultSet rs = null;
 		String pathGame = this.getServletContext().getRealPath("game.db");
-		JSONObject resp = new JSONObject();
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:" + pathGame);
 			stmt = c.createStatement();
-			String sql = "SELECT AREA, WINNER FROM GAME WHERE ID="
+			String sql = "UPDATE GAME SET WINNER= "
+					+ request.getParameter("winner") + " WHERE ID="
 					+ request.getParameter("id");
-			rs = stmt.executeQuery(sql);
-			if (!rs.next()) {
-				resp.put("result", new Boolean(false));
-			} else {
-				resp.put("result", new Boolean(true));
-				resp.put("area", rs.getString("area"));
-				resp.put("winner", rs.getInt("winner"));
-			}
-		} catch (Exception e) {
-			resp.put("result", new Boolean(false));
+			stmt.executeQuery(sql);
+		} catch (ClassNotFoundException e) {
+		} catch (SQLException e) {
 		} finally {
 			try {
 				stmt.close();
@@ -72,12 +52,6 @@ public class GetArea extends HttpServlet {
 				c.close();
 			} catch (SQLException e) {
 			}
-			try {
-				rs.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
 		}
-		response.getWriter().write(resp.toJSONString());
 	}
 }

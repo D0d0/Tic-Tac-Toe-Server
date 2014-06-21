@@ -51,7 +51,7 @@ public class CreateGame extends HttpServlet {
 				}
 			}
 			area = area.trim();
-			String sql = "INSERT INTO GAME (NAME, HOST, ONLINE, MAX, SIZE, AREA, IS_ACTIVE, MOVE, RANK) VALUES ('"
+			String sql = "INSERT INTO GAME (NAME, HOST, ONLINE, MAX, SIZE, AREA, IS_ACTIVE, MOVE, RANK, ROW_FOR_WIN, WINNER) VALUES ('"
 					+ request.getParameter("name")
 					+ "', '"
 					+ request.getParameter("host")
@@ -61,7 +61,7 @@ public class CreateGame extends HttpServlet {
 					+ request.getParameter("size")
 					+ ", '"
 					+ area
-					+ "', 1, 1, 2)";
+					+ "', 1, 1, 2, " + request.getParameter("rows") + ", -1)";
 			stmt.executeUpdate(sql);
 			sql = "SELECT max(id) as id FROM GAME";
 			rs = stmt.executeQuery(sql);

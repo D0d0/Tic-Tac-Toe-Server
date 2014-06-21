@@ -51,7 +51,7 @@ public class GetOnlinePlayers extends HttpServlet {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:" + pathGame);
 			stmt = c.createStatement();
-			String sql = "SELECT ONLINE, IS_ACTIVE, MOVE, RANK FROM GAME WHERE ID="
+			String sql = "SELECT ONLINE, IS_ACTIVE, MOVE, RANK, ROW_FOR_WIN FROM GAME WHERE ID="
 					+ request.getParameter("id");
 			rs = stmt.executeQuery(sql);
 			if (!rs.next()) {
@@ -63,6 +63,7 @@ public class GetOnlinePlayers extends HttpServlet {
 				if (rs.getInt("IS_ACTIVE") == 2) {
 					resp.put("move", rs.getInt("MOVE"));
 					resp.put("rank", rs.getInt("RANK"));
+					resp.put("rows", rs.getInt("ROW_FOR_WIN"));
 					sql = "UPDATE GAME SET RANK = RANK + 1 WHERE ID="
 							+ request.getParameter("id");
 					stmt.executeUpdate(sql);
