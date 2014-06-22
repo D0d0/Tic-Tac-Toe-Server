@@ -46,13 +46,4 @@ public class Index extends HttpServlet {
 					+ rsp.getdatabaseExists() + "</span>");
 		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-	}
-
 }

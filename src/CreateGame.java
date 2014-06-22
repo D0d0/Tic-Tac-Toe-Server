@@ -89,9 +89,4 @@ public class CreateGame extends HttpServlet {
 		}
 		response.getWriter().write(resp.toJSONString());
 	}
-
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
 }

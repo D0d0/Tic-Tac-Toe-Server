@@ -28,15 +28,6 @@ public class Connect extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
@@ -56,12 +47,12 @@ public class Connect extends HttpServlet {
 			stmt.executeQuery(sql);
 			sql = "SELECT * FROM GAME WHERE ID=" + request.getParameter("id");
 			rs = stmt.executeQuery(sql);
-			if (rs.next()){
+			if (rs.next()) {
 				resp.put("result", true);
 				resp.put("online", rs.getInt("online"));
 				resp.put("max", rs.getInt("max"));
 				resp.put("size", rs.getInt("size"));
-			}else {
+			} else {
 				resp.put("result", false);
 			}
 		} catch (Exception e) {
